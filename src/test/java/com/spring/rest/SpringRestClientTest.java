@@ -10,7 +10,7 @@ import com.spring.rest.model.User;
 
 
 /*
- * class to test rest end points using spring RestTemplate
+ * class to test REST end points using spring RestTemplate
  */
 public class SpringRestClientTest {
 
