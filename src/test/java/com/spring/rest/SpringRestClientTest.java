@@ -14,7 +14,7 @@ import com.spring.rest.model.User;
  */
 public class SpringRestClientTest {
 
-	public static final String REST_SERVICE_URI = "http://localhost:8082/Spring4RestServiceExample";
+	public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
 	
 	/* GET */
 	@SuppressWarnings("unchecked")
@@ -76,7 +76,7 @@ public class SpringRestClientTest {
 
     public static void main(String args[]){
 		listAllUsers();
-		/*getUser();
+		getUser();
 		createUser();
 		listAllUsers();
 		updateUser();
@@ -84,6 +84,6 @@ public class SpringRestClientTest {
 		deleteUser();
 		listAllUsers();
 		deleteAllUsers();
-		listAllUsers();*/
+		listAllUsers();
     }
 }

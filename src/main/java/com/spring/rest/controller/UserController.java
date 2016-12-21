@@ -2,7 +2,6 @@ package com.spring.rest.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,6 @@ import com.spring.rest.service.UserService;
 @RestController
 public class UserController {
 
-	private static Logger logger = Logger.getLogger(UserController.class);
 	// Service which will do all data retrieval/manipulation work
 	@Autowired
 	UserService userService; 
@@ -34,7 +32,7 @@ public class UserController {
 
 	@RequestMapping(value = "/user/", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers() {
-		logger.info("STRAT");
+		System.out.println("Started");
 		List<User> users = userService.findAllUsers();
 		if (users.isEmpty()) {
 			// You may return HttpStatus.NOT_FOUND
