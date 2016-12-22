@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.spring.rest.model.User;
+import com.spring.rest.model.Employee;
 
 
 /*
@@ -14,76 +14,77 @@ import com.spring.rest.model.User;
  */
 public class SpringRestClientTest {
 
-	public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
+	//public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
+	public static final String REST_SERVICE_URI = "http://localhost:8082/Spring4RestServiceExample";
 	
 	/* GET */
 	@SuppressWarnings("unchecked")
-	private static void listAllUsers(){
-		System.out.println("-----------Testing listAllUsers API-----------");
+	private static void listAllEmployees(){
+		System.out.println("-----------Testing listAllEmployees API-----------");
 		
 		RestTemplate restTemplate = new RestTemplate();
-		List<LinkedHashMap<String, Object>> usersMap = restTemplate.getForObject(REST_SERVICE_URI+"/user/", List.class);
+		List<LinkedHashMap<String, Object>> employeesMap = restTemplate.getForObject(REST_SERVICE_URI+"/employee/", List.class);
 		
-		if(usersMap!=null){
-			for(LinkedHashMap<String, Object> map : usersMap){
-	            System.out.println("User : id="+map.get("id")+", Name="+map.get("name")+", Age="+map.get("age")+", Salary="+map.get("salary"));;
+		if(employeesMap!=null){
+			for(LinkedHashMap<String, Object> map : employeesMap){
+	            System.out.println("Employee : id="+map.get("id")+", Name="+map.get("name")+", Age="+map.get("age")+", Salary="+map.get("salary"));;
 	        }
 		}else{
-			System.out.println("-----------No user exist----------");
+			System.out.println("-----------No employee exist----------");
 		}
 	}
 	
 	/* GET */
-	private static void getUser(){
-		System.out.println("-----------Testing getUser API----------");
+	private static void getEmployee(){
+		System.out.println("-----------Testing getEmployee API----------");
 		RestTemplate restTemplate = new RestTemplate();
-        User user = restTemplate.getForObject(REST_SERVICE_URI+"/user/1", User.class);
-        System.out.println(user);
+        Employee employee = restTemplate.getForObject(REST_SERVICE_URI+"/employee/1", Employee.class);
+        System.out.println(employee);
 	}
 	
 	/* POST */
-    private static void createUser() {
-		System.out.println("-----------Testing create User API----------");
+    private static void createEmployee() {
+		System.out.println("-----------Testing create Employee API----------");
     	RestTemplate restTemplate = new RestTemplate();
-        User user = new User(0,"Sarah",51,134);
-        URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/user/", user, User.class);
+        Employee employee = new Employee(0,"Sarah",51,134);
+        URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/employee/", employee, Employee.class);
         System.out.println("Location : "+uri.toASCIIString());
     }
 
     /* PUT */
-    private static void updateUser() {
-		System.out.println("-----------Testing update User API----------");
+    private static void updateEmployee() {
+		System.out.println("-----------Testing update Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
-        User user  = new User(1,"Tomy",33, 70000);
-        restTemplate.put(REST_SERVICE_URI+"/user/1", user);
-        System.out.println(user);
+        Employee employee  = new Employee(1,"Tomy",33, 70000);
+        restTemplate.put(REST_SERVICE_URI+"/employee/1", employee);
+        System.out.println(employee);
     }
 
     /* DELETE */
-    private static void deleteUser() {
-		System.out.println("-----------Testing delete User API----------");
+    private static void deleteEmployee() {
+		System.out.println("-----------Testing delete Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(REST_SERVICE_URI+"/user/3");
+        restTemplate.delete(REST_SERVICE_URI+"/employee/3");
     }
 
 
     /* DELETE */
-    private static void deleteAllUsers() {
-		System.out.println("-----------Testing all delete Users API----------");
+    private static void deleteAllEmployee() {
+		System.out.println("-----------Testing all delete Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(REST_SERVICE_URI+"/user/");
+        restTemplate.delete(REST_SERVICE_URI+"/employee/");
     }
 
     public static void main(String args[]){
-		listAllUsers();
-		getUser();
-		createUser();
-		listAllUsers();
-		updateUser();
-		listAllUsers();
-		deleteUser();
-		listAllUsers();
-		deleteAllUsers();
-		listAllUsers();
+		listAllEmployees();
+		getEmployee();
+		createEmployee();
+		listAllEmployees();
+		updateEmployee();
+		listAllEmployees();
+		deleteEmployee();
+		listAllEmployees();
+		deleteAllEmployee();
+		listAllEmployees();
     }
 }

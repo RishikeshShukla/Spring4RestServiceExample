@@ -15,19 +15,19 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-public class UserBeforeAndAfterAspect {
+public class EmployeeBeforeAndAfterAspect {
 
-	private static Logger logger = Logger.getLogger(UserBeforeAndAfterAspect.class);
+	private static Logger logger = Logger.getLogger(EmployeeBeforeAndAfterAspect.class);
 
-	@Pointcut("execution(* com.spring.rest.controller.UserController.*(..))")
+	@Pointcut("execution(* com.spring.rest.controller.EmployeeController.*(..))")
 	public void startPoint() {
 	}
 	
-	@Pointcut("execution(* com.spring.rest.controller.UserController.*(..))")
+	@Pointcut("execution(* com.spring.rest.controller.EmployeeController.*(..))")
 	public void endPoint() {
 	}
 
-	// @Before("execution(* com.spring.rest.controller.UserController.*(..))")
+	// @Before("execution(* com.spring.rest.controller.EmployeeController.*(..))")
 	
 	@Before(value = "startPoint()", argNames = "joinPoint")
 	public void beforeCall(JoinPoint joinPoint) {
@@ -35,12 +35,9 @@ public class UserBeforeAndAfterAspect {
 		logger.info("Starting method name :" + joinPoint.getSignature().toShortString() + " | Args => "
 				+ Arrays.asList(joinPoint.getArgs()));
 		
-		
-
-		// logger.info("Start of method.");
 	}
 
-	//@After("execution(* com.spring.rest.controller.UserController.*(..))")
+	//@After("execution(* com.spring.rest.controller.EmployeeController.*(..))")
 	
 	@After(value = "endPoint()" , argNames = "joinPoint")
 	public void afterCall(JoinPoint joinPoint ) {

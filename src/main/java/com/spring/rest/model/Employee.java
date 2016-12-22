@@ -1,6 +1,6 @@
 package com.spring.rest.model;
 
-public class User {
+public class Employee {
 
 	private long id;
 	
@@ -10,11 +10,11 @@ public class User {
 	
 	private double salary;
 
-	public User(){
+	public Employee(){
 		id=0;
 	}
 	
-	public User(long id, String name, int age, double salary){
+	public Employee(long id, String name, int age, double salary){
 		this.id = id;
 		this.name = name;
 		this.age = age;
@@ -69,7 +69,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Employee other = (Employee) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -77,7 +77,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", age=" + age
+		return "Employee [id=" + id + ", name=" + name + ", age=" + age
 				+ ", salary=" + salary + "]";
 	}
 
