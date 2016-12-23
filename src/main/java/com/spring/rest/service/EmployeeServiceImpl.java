@@ -1,40 +1,36 @@
 package com.spring.rest.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.rest.employee.dao.EmployeeDAO;
 import com.spring.rest.model.Employee;
 
 @Service("employeeService")
-@Transactional
-public class EmployeeServiceImpl implements EmployeeService {
 
-	private static final AtomicLong counter = new AtomicLong();
+public class EmployeeServiceImpl  implements EmployeeService{
 
-	private static List<Employee> employees;
 
-	static {
-		employees = populateDummyEmployees();
-	}
+	
+	@Autowired
+	private EmployeeDAO employeeDAO;
+	
 
+	@Transactional
 	public List<Employee> findAllEmployees() {
-		return employees;
+		return employeeDAO.findAllEmployees();
 	}
 
+	@Transactional
 	public Employee findById(long id) {
-		for (Employee employee : employees) {
-			if (employee.getId() == id) {
-				return employee;
-			}
-		}
-		return null;
-	}
+			return employeeDAO.findById();
 
+		
+	}
+/*
 	public Employee findByName(String name) {
 		for (Employee employee : employees) {
 			if (employee.getName().equalsIgnoreCase(name)) {
@@ -79,6 +75,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	public void deleteAllEmployees() {
 		employees.clear();
-	}
+	}*/
 
 }

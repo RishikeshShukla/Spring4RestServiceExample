@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "employee", catalog = "spring_rest_app", uniqueConstraints = @UniqueConstraint(columnNames = "email_id"))
-public class Employee implements java.io.Serializable {
+public class Employee implements com.spring.rest.model.Entity  {
 
 	/**
 	 * 

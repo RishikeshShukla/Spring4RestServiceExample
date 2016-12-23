@@ -1,19 +1,14 @@
 package com.spring.rest.controller;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spring.rest.model.Employee;
 import com.spring.rest.service.EmployeeService;
@@ -33,7 +28,7 @@ public class EmployeeController {
 	/**
 	 * Method to Retrieve All Employee
 	 */
-	@RequestMapping(value = "/employee/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/employee/", method = RequestMethod.GET)
 	public ResponseEntity<List<Employee>> listAllEmployees() {
 
 		List<Employee> employees = employeeService.findAllEmployees();
@@ -43,7 +38,7 @@ public class EmployeeController {
 
 		}
 		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
-	}
+	}*/
 
 	/**
 	 * Method to Retrieve Single Employee
@@ -62,15 +57,15 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 
-	// -----------------------------------------------
-	/**
+	/*
+	*//**
 	 * Method Create a Employee
 	 * 
 	 * @param employee Employee Object
 	 * @param ucBuilder
 	 * 
 	 * @return void
-	 * */
+	 * *//*
 
 	@RequestMapping(value = "/employee/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createEmployee(@RequestBody Employee employee, UriComponentsBuilder ucBuilder) {
@@ -88,14 +83,14 @@ public class EmployeeController {
 	}
 
 	
-     /**
+     *//**
       * Method to update Employee
       * 
       * @param id    employee id
       * @param employee   employee object
       * 
       * @return employee 
-      */
+      *//*
 	@RequestMapping(value = "/employee/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee) {
 	
@@ -116,13 +111,13 @@ public class EmployeeController {
 	}
 
 	
-	/**
+	*//**
 	 * Method to Delete a Employee
 	 * 
 	 * @param id employee id
 	 *             
 	 * @return employee deleted employee
-	 * */
+	 * *//*
 
 	@RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") long id) {
@@ -140,10 +135,10 @@ public class EmployeeController {
 
 	// -------------------  --------------------
 
-	/**
+	*//**
 	 * Delete All Employee
 	 * 
-	 */
+	 *//*
 	@RequestMapping(value = "/employee/", method = RequestMethod.DELETE)
 	public ResponseEntity<Employee> deleteAllEmployees() {
 		logger.info("Deleting All Employees");
@@ -151,5 +146,5 @@ public class EmployeeController {
 		employeeService.deleteAllEmployees();
 		return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
 	}
-
+*/
 }

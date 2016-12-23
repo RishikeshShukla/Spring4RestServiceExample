@@ -1,7 +1,5 @@
 package com.spring.rest.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "address", catalog = "spring_rest_app")
-public class Address implements Serializable {
+public class Address implements com.spring.rest.model.Entity {
 
 	/**
 	 * 

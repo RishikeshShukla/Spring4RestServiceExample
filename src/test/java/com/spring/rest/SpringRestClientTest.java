@@ -12,12 +12,12 @@ import com.spring.rest.model.Employee;
 /*
  * class to test REST end points using spring RestTemplate
  */
-public class SpringRestClientTest {
+public class SpringRestClientTest {/*
 
 	//public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
 	public static final String REST_SERVICE_URI = "http://localhost:8082/Spring4RestServiceExample";
 	
-	/* GET */
+	 GET 
 	@SuppressWarnings("unchecked")
 	private static void listAllEmployees(){
 		System.out.println("-----------Testing listAllEmployees API-----------");
@@ -34,7 +34,7 @@ public class SpringRestClientTest {
 		}
 	}
 	
-	/* GET */
+	 GET 
 	private static void getEmployee(){
 		System.out.println("-----------Testing getEmployee API----------");
 		RestTemplate restTemplate = new RestTemplate();
@@ -42,7 +42,7 @@ public class SpringRestClientTest {
         System.out.println(employee);
 	}
 	
-	/* POST */
+	 POST 
     private static void createEmployee() {
 		System.out.println("-----------Testing create Employee API----------");
     	RestTemplate restTemplate = new RestTemplate();
@@ -51,7 +51,7 @@ public class SpringRestClientTest {
         System.out.println("Location : "+uri.toASCIIString());
     }
 
-    /* PUT */
+     PUT 
     private static void updateEmployee() {
 		System.out.println("-----------Testing update Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -60,7 +60,7 @@ public class SpringRestClientTest {
         System.out.println(employee);
     }
 
-    /* DELETE */
+     DELETE 
     private static void deleteEmployee() {
 		System.out.println("-----------Testing delete Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -68,7 +68,7 @@ public class SpringRestClientTest {
     }
 
 
-    /* DELETE */
+     DELETE 
     private static void deleteAllEmployee() {
 		System.out.println("-----------Testing all delete Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -87,4 +87,4 @@ public class SpringRestClientTest {
 		deleteAllEmployee();
 		listAllEmployees();
     }
-}
+*/}

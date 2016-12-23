@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "department", catalog = "spring_rest_app")
-public class Department implements java.io.Serializable {
+public class Department implements com.spring.rest.model.Entity  {
 
 	/**
 	 * 
