@@ -1,12 +1,14 @@
 package com.spring.rest.service;
 
+import java.util.List;
+
 import com.spring.rest.model.Employee;
 
 public interface EmployeeService {
 
 	Employee findById(long id);
 
-	/*Employee findByName(String name);
+	Employee findByEmail(String email);
 
 	void saveEmployee(Employee employee);
 
@@ -16,8 +18,6 @@ public interface EmployeeService {
 
 	List<Employee> findAllEmployees();
 
-	void deleteAllEmployees();
-
-	public boolean isEmployeeExist(Employee employee);*/
+	public boolean isEmployeeExist(Employee employee);
 
 }

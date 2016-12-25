@@ -6,18 +6,19 @@ import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
 
+import com.spring.rest.model.Department;
 import com.spring.rest.model.Employee;
 
 
 /*
  * class to test REST end points using spring RestTemplate
  */
-public class SpringRestClientTest {/*
+public class SpringRestClientTest {
 
 	//public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
-	public static final String REST_SERVICE_URI = "http://localhost:8082/Spring4RestServiceExample";
+	public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
 	
-	 GET 
+	 //GET 
 	@SuppressWarnings("unchecked")
 	private static void listAllEmployees(){
 		System.out.println("-----------Testing listAllEmployees API-----------");
@@ -34,7 +35,7 @@ public class SpringRestClientTest {/*
 		}
 	}
 	
-	 GET 
+	 //GET 
 	private static void getEmployee(){
 		System.out.println("-----------Testing getEmployee API----------");
 		RestTemplate restTemplate = new RestTemplate();
@@ -42,25 +43,28 @@ public class SpringRestClientTest {/*
         System.out.println(employee);
 	}
 	
-	 POST 
+	 //POST 
     private static void createEmployee() {
 		System.out.println("-----------Testing create Employee API----------");
     	RestTemplate restTemplate = new RestTemplate();
-        Employee employee = new Employee(0,"Sarah",51,134);
+    	
+    	//Employee employee = new Employee(,"Sarah",51,134);
+    	Department department = new Department(1,"CS");
+    	Employee employee = new Employee(1, department, "rishikeshs092@gmail.com", "Rishikesh");
         URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/employee/", employee, Employee.class);
         System.out.println("Location : "+uri.toASCIIString());
     }
 
-     PUT 
+     //PUT 
     private static void updateEmployee() {
 		System.out.println("-----------Testing update Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
-        Employee employee  = new Employee(1,"Tomy",33, 70000);
-        restTemplate.put(REST_SERVICE_URI+"/employee/1", employee);
-        System.out.println(employee);
+       // Employee employee  = new Employee(1,"Tomy",33, 70000);
+       // restTemplate.put(REST_SERVICE_URI+"/employee/1", employee);
+        //System.out.println(employee);
     }
 
-     DELETE 
+     //DELETE 
     private static void deleteEmployee() {
 		System.out.println("-----------Testing delete Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
@@ -68,23 +72,24 @@ public class SpringRestClientTest {/*
     }
 
 
-     DELETE 
-    private static void deleteAllEmployee() {
+     //DELETE 
+   /* private static void deleteAllEmployee() {
 		System.out.println("-----------Testing all delete Employee API----------");
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(REST_SERVICE_URI+"/employee/");
-    }
+    }*/
 
     public static void main(String args[]){
-		listAllEmployees();
+    	createEmployee();
+		/*listAllEmployees();
 		getEmployee();
-		createEmployee();
+		
 		listAllEmployees();
 		updateEmployee();
 		listAllEmployees();
 		deleteEmployee();
 		listAllEmployees();
-		deleteAllEmployee();
-		listAllEmployees();
+		//deleteAllEmployee();
+		listAllEmployees();*/
     }
-*/}
+}

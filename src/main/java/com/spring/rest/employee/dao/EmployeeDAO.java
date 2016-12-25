@@ -15,6 +15,14 @@ public interface EmployeeDAO {
 
 	List<Employee> findAllEmployees();
 
-	Employee findById();
+	Employee findById(long id);
+
+	Employee findByEmail(String email);
+
+	Employee save(Employee employee);
+
+	void update(Employee employee);
+
+	void remove(Employee employee);
 
 }

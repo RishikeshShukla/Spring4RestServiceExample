@@ -15,12 +15,6 @@ public class AppInitializer implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();
 		appContext.register(AppConfiguration.class);
 
-		/*
-		 * javax.servlet.FilterRegistration.Dynamic corsFilter =
-		 * container.addFilter("simpleCORSFilter", SimpleCORSFilter.class);
-		 * corsFilter.addMappingForUrlPatterns(null, true, "/*");
-		 */
-
 		container.addListener(new ContextLoaderListener(appContext));
 		appContext.setServletContext(container);
 
