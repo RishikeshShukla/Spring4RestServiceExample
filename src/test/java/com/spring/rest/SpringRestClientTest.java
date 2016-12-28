@@ -16,7 +16,7 @@ import com.spring.rest.model.Employee;
 public class SpringRestClientTest {
 
 	//public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
-	public static final String REST_SERVICE_URI = "http://localhost:8080/Spring4RestServiceExample";
+	public static final String REST_SERVICE_URI = "http://localhost:8082/Spring4RestServiceExample";
 	
 	 //GET 
 	@SuppressWarnings("unchecked")
