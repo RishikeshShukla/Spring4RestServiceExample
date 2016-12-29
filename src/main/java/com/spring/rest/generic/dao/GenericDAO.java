@@ -2,6 +2,7 @@ package com.spring.rest.generic.dao;
 
 import java.util.List;
 
+import com.spring.rest.exception.ObjectNotFoundException;
 import com.spring.rest.model.Entity;
 
 /**
@@ -13,27 +14,27 @@ public interface GenericDAO {
 	/**
 	 * find entity by Ids
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param id
+	 * @param persistentClass
 	 * @return Entity
 	 */
-	Entity findById(long id, Class<?> persistentClass);
+	Entity findById(long id, Class<?> persistentClass) throws ObjectNotFoundException;
 
 	/**
 	 * find entity by Ids
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param email
+	 * @param persistentClass
 	 * @return Entity
 	 */
 
-	Entity findByEmail(String email, Class<?> persistentClass);
+	Entity findByEmail(String email, Class<?> persistentClass) throws ObjectNotFoundException;
 
 	/**
 	 * find all entities
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param id
+	 * @param persistentClass
 	 * @return Entity
 	 */
 
@@ -42,8 +43,7 @@ public interface GenericDAO {
 	/**
 	 * create a new Entity 
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param entity
 	 * @return 
 	 */
 	
@@ -52,8 +52,7 @@ public interface GenericDAO {
 	/**
 	 * Update a Entity 
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param entity
 	 * @return 
 	 */
 	
@@ -62,8 +61,8 @@ public interface GenericDAO {
 	/**
 	 * Delete a Entity by primary key 
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param id
+	 * @param persistentClass
 	 * @return 
 	 */
 	
@@ -72,8 +71,7 @@ public interface GenericDAO {
 	/**
 	 * Delete a Entity 
 	 * 
-	 * @id
-	 * @persistentClass
+	 * @param entity
 	 * @return 
 	 */
 	

@@ -10,7 +10,7 @@ import com.spring.rest.model.Department;
 import com.spring.rest.model.Employee;
 
 
-/*
+/**
  * class to test REST end points using spring RestTemplate
  */
 public class SpringRestClientTest {
@@ -50,7 +50,8 @@ public class SpringRestClientTest {
     	
     	//Employee employee = new Employee(,"Sarah",51,134);
     	Department department = new Department(1,"CS");
-    	Employee employee = new Employee(1, department, "rishikeshs092@gmail.com", "Rishikesh");
+    	Employee employee = new Employee(1, 27, "rishikeshs092@gmail.com", "Rishikesh");
+    	
         URI uri = restTemplate.postForLocation(REST_SERVICE_URI+"/employee/", employee, Employee.class);
         System.out.println("Location : "+uri.toASCIIString());
     }
@@ -80,9 +81,10 @@ public class SpringRestClientTest {
     }*/
 
     public static void main(String args[]){
-    	createEmployee();
+    //	createEmployee();
+    	getEmployee();
 		/*listAllEmployees();
-		getEmployee();
+		
 		
 		listAllEmployees();
 		updateEmployee();

@@ -2,13 +2,25 @@ package com.spring.rest.generic.dao;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.spring.rest.exception.CreateObjectException;
+import com.spring.rest.exception.DeleteObjectException;
+import com.spring.rest.exception.ObjectNotFoundException;
+import com.spring.rest.exception.UpdateObjectException;
 import com.spring.rest.model.Entity;
+import com.spring.rest.util.Constants;
+
+/**
+ * @author Rishikesh Shukla
+ * 
+ *         class to give body to GenericDAO methods
+ */
 
 @Component
 public class GenericHibernateDAO implements GenericDAO {
@@ -22,46 +34,81 @@ public class GenericHibernateDAO implements GenericDAO {
 
 	@Override
 	public Entity findById(long id, Class<?> persistentClass) {
+		try {
+			return (Entity) getSession().get(persistentClass, id);
 
-		return (Entity) getSession().get(persistentClass, id);
+		} catch (HibernateException ex) {
+			throw new ObjectNotFoundException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
 	}
 
 	@Override
 	public Entity findByEmail(String email, Class<?> persistentClass) {
+		try {
+			Query findByEmailQry = getSession().createQuery(
+					"from " + persistentClass.getSimpleName()
+							+ " where emailId = :email");
+			findByEmailQry.setString("email", email);
+			return (Entity) findByEmailQry.uniqueResult();
 
-		return (Entity) getSession().get(email, persistentClass);
+		} catch (HibernateException ex) {
+			throw new ObjectNotFoundException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<? extends Entity> findAll(Class<?> persistentClass) {
-
-		Query findAllQuery = getSession().createQuery("select * from " + persistentClass.getSimpleName());
-		return findAllQuery.list();
+		try {
+			Query findAllQuery = getSession().createQuery(
+					"from " + persistentClass.getSimpleName());
+			return findAllQuery.list();
+		} catch (HibernateException ex) {
+			throw new ObjectNotFoundException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
 	}
 
 	@Override
 	public Entity create(Entity entity) {
-		getSession().save(entity);
-		return entity;
+		try {
+			getSession().save(entity);
+			return entity;
+		} catch (HibernateException ex) {
+			throw new CreateObjectException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
+
 	}
 
 	@Override
 	public void update(Entity entity) {
-		getSession().update(entity);
+		try {
+			getSession().update(entity);
+		} catch (HibernateException ex) {
+			throw new UpdateObjectException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
+		
 
 	}
 
 	@Override
 	public void delete(Class<?> persistentClass, long id) {
-		getSession().delete((findById(id, persistentClass)));
+		try {
+			getSession().delete(findById(id, persistentClass));
+		} catch (HibernateException ex) {
+			throw new DeleteObjectException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
+		
 
 	}
 
 	@Override
 	public void delete(Entity entity) {
-		getSession().delete(entity);
-		
+		try {
+			getSession().delete(entity);
+		} catch (HibernateException ex) {
+			throw new DeleteObjectException(Constants.UNABLE_TO_PERFORM_OPERATION, ex);
+		}
+
 	}
 
 }

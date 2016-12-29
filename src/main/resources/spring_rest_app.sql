@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `spring_rest_app`.`employee` (
   `last_name` VARCHAR(45) NULL,
   `age` INT NULL,
   `salary` DECIMAL NULL,
-  `department_id` BIGINT(10) NOT NULL,
+  `department_id` BIGINT(10) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_id_UNIQUE` (`email_id` ASC),
   INDEX `fk_employee_department_idx` (`department_id` ASC),

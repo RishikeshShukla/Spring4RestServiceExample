@@ -1,5 +1,8 @@
 package com.spring.rest.exception;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ErrorMessage {
 	private int status;
 	private int errorCode;

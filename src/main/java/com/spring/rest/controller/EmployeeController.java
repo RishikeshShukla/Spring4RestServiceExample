@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.spring.rest.employee.service.EmployeeService;
 import com.spring.rest.model.Employee;
-import com.spring.rest.service.EmployeeService;
 
 /*
  * Controller which will do all data retrieval/manipulation for Employees
@@ -35,7 +35,8 @@ public class EmployeeController {
 	 * Method to Retrieve All Employee
 	 */
 	
-	@RequestMapping(value = "/employee/", method = RequestMethod.GET)
+	@RequestMapping(value = "/employee/", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<Employee>> listAllEmployees() {
 
 		List<Employee> employees = employeeService.findAllEmployees();
@@ -53,7 +54,8 @@ public class EmployeeController {
 	 * 
 	 * @return employee object
 	 */
-	@RequestMapping(value = "/employee/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/employee/{id}", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Employee> getEmployee(@PathVariable("id") long id) {
 		
 		Employee employee = employeeService.findById(id);
@@ -73,7 +75,9 @@ public class EmployeeController {
 	 * @return void
 	 */
 
-	@RequestMapping(value = "/employee/", method = RequestMethod.POST)
+	@RequestMapping(value = "/employee/", method = RequestMethod.POST, consumes = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Void> createEmployee(@RequestBody Employee employee, UriComponentsBuilder ucBuilder) {
 		
         logger.info("Creating Employee " + employee.getFirstName());
@@ -98,7 +102,9 @@ public class EmployeeController {
       * 
       * @return employee 
       */
-	@RequestMapping(value = "/employee/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/employee/{id}", method = RequestMethod.PUT, consumes = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee) {
 	
 		logger.info("Updating Employee " + id);
@@ -128,7 +134,8 @@ public class EmployeeController {
 	 * @return employee deleted employee
 	 * */
 
-	@RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE, produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") long id) {
 		logger.info("Fetching & Deleting Employee with id " + id);
 

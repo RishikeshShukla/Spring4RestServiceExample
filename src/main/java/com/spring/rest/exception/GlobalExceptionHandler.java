@@ -7,10 +7,15 @@ import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.spring.rest.util.Constants;
 
+/**
+ * class to handle exception across the application
+ * */
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
 	private static Logger logger = Logger
@@ -26,7 +31,8 @@ public class GlobalExceptionHandler {
 		errorMessage.setErrorCode(Constants.SQL_ERROR_CODE);
 		errorMessage.setErrorMessage(Constants.REQUEST_FAILED_MESSAGE
 				+ sqlException.getMessage());
-		logger.error("Request failed due to SQLException : " + sqlException.getCause());
+		logger.error("Request failed due to SQLException : "
+				+ sqlException.getCause());
 		return new ResponseEntity<ErrorMessage>(errorMessage,
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -38,7 +44,8 @@ public class GlobalExceptionHandler {
 		errorMessage.setErrorCode(Constants.DATA_ERROR_CODE);
 		errorMessage.setErrorMessage(Constants.REQUEST_FAILED_MESSAGE
 				+ dataException.getMessage());
-		logger.error("Request failed due to DataExeption   : " + dataException.getCause());
+		logger.error("Request failed due to DataExeption   : "
+				+ dataException.getCause());
 		return new ResponseEntity<ErrorMessage>(errorMessage,
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -49,10 +56,22 @@ public class GlobalExceptionHandler {
 		errorMessage.setStatus(Constants.FAILED);
 		errorMessage.setErrorMessage(Constants.REQUEST_FAILED_MESSAGE
 				+ exception.getLocalizedMessage());
-		logger.error("Request failed due to Exception : " + exception.getCause());
+		logger.error("Request failed due to Exception : "
+				+ exception.getCause());
 		return new ResponseEntity<ErrorMessage>(errorMessage,
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@ExceptionHandler(ObjectNotFoundException.class)
+	public ResponseEntity<ErrorMessage> handleGenericException(
+			ObjectNotFoundException exception) {
+		errorMessage.setStatus(Constants.FAILED);
+		errorMessage.setErrorMessage(Constants.REQUEST_FAILED_MESSAGE
+				+ exception.getLocalizedMessage());
+		logger.error("Request failed due to Exception : "
+				+ exception.getCause());
+		return new ResponseEntity<ErrorMessage>(errorMessage,
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
 }

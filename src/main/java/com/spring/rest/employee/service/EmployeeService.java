@@ -1,4 +1,4 @@
-package com.spring.rest.service;
+package com.spring.rest.employee.service;
 
 import java.util.List;
 

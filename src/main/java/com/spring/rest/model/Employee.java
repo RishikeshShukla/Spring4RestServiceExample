@@ -34,10 +34,10 @@ public class Employee implements com.spring.rest.model.Entity  {
 	public Employee() {
 	}
 
-	public Employee(long id, Department department, String emailId,
+	public Employee(long id, int age , String emailId,
 			String firstName) {
 		this.id = id;
-		this.department = department;
+		this.age = age;
 		this.emailId = emailId;
 		this.firstName = firstName;
 	}
@@ -66,7 +66,7 @@ public class Employee implements com.spring.rest.model.Entity  {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "department_id", nullable = false)
+	@JoinColumn(name = "department_id", nullable = true)
 	public Department getDepartment() {
 		return department;
 	}
