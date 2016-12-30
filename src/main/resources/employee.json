@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "department": null,
+    "emailId": "jitender.chahar@gmail.com",
+    "firstName": "Jitender",
+    "lastName": "Chahar",
+    "age": 27,
+    "salary": 49000,
+    "addresses": []
+  },
+  {
+    "id": 2,
+    "department": null,
+    "emailId": "rishikesh092@gmail.com",
+    "firstName": "Rishikesh",
+    "lastName": "Shukla",
+    "age": 27,
+    "salary": 49000,
+    "addresses": []
+  },
+  {
+    "id": 3,
+    "department": null,
+    "emailId": "kapilQA@gmail.com",
+    "firstName": "Kapil",
+    "lastName": "Gupta",
+    "age": 27,
+    "salary": 40000,
+    "addresses": []
+  }
+]

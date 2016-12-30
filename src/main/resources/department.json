@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "ConfingMgmt Department",
+    "location": "Pune",
+    "employees": []
+  },
+  {
+    "id": 2,
+    "name": "Finance Department",
+    "location": "Pune",
+    "employees": []
+  },
+  {
+    "id": 3,
+    "name": "Finance Department",
+    "location": "Delhi",
+    "employees": []
+  }
+]

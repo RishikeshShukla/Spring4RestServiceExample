@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "employee", catalog = "spring_rest_app", uniqueConstraints = @UniqueConstraint(columnNames = "email_id"))
 public class Employee implements com.spring.rest.model.Entity  {
@@ -120,6 +123,7 @@ public class Employee implements com.spring.rest.model.Entity  {
 		this.salary = salary;
 	}
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
 	public Set<Address> getAddresses() {
 		return addresses;

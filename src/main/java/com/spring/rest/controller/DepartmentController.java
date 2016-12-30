@@ -54,7 +54,7 @@ public class DepartmentController {
 	 * @param id
 	 * @return Department
 	 */
-	@RequestMapping(value = "{/id/}", method = RequestMethod.GET, produces = {
+	@RequestMapping(value = "{id}/", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Department> getDepartmentById(@PathVariable("id") long id) {
 		Department department = departmentService.findById(id);
@@ -82,7 +82,7 @@ public class DepartmentController {
 		departmentService.saveDepartment(department);		
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/{id}").buildAndExpand(department.getId()).toUri());
+		headers.setLocation(ucBuilder.path("{id}/").buildAndExpand(department.getId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
@@ -93,7 +93,7 @@ public class DepartmentController {
 	 * @param department
 	 * @return
 	 */
-	@RequestMapping(value = {"/id/"},method = RequestMethod.PUT, consumes = {
+	@RequestMapping(value = "{id}/",method = RequestMethod.PUT, consumes = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Department> updateDepartment(
@@ -119,7 +119,7 @@ public class DepartmentController {
 	 * @return
 	 */
 	
-	@RequestMapping(value = "{/id/}", method = RequestMethod.DELETE, consumes = {
+	@RequestMapping(value = "{id}/", method = RequestMethod.DELETE, consumes = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public  ResponseEntity<Void> deleteDepartment(@PathVariable("id") long id){
 		
@@ -129,6 +129,6 @@ public class DepartmentController {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		departmentService.deleteDepartment(department);
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 }

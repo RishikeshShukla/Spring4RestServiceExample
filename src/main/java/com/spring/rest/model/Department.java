@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 @Table(name = "department", catalog = "spring_rest_app")
 public class Department implements com.spring.rest.model.Entity  {
@@ -68,6 +71,7 @@ public class Department implements com.spring.rest.model.Entity  {
 		this.location = location;
 	}
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="department")
 	public Set<Employee> getEmployees() {
 		return employees;

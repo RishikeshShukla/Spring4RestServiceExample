@@ -62,12 +62,13 @@ public class GlobalExceptionHandler {
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler(ObjectNotFoundException.class)
+	@ExceptionHandler({ ObjectNotFoundException.class,
+			CreateObjectException.class, UpdateObjectException.class,
+			DeleteObjectException.class })
 	public ResponseEntity<ErrorMessage> handleGenericException(
 			ObjectNotFoundException exception) {
 		errorMessage.setStatus(Constants.FAILED);
-		errorMessage.setErrorMessage(Constants.REQUEST_FAILED_MESSAGE
-				+ exception.getLocalizedMessage());
+		errorMessage.setErrorMessage(exception.getLocalizedMessage());
 		logger.error("Request failed due to Exception : "
 				+ exception.getCause());
 		return new ResponseEntity<ErrorMessage>(errorMessage,

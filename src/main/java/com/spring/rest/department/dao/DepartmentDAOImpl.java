@@ -3,6 +3,7 @@ package com.spring.rest.department.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.spring.rest.generic.dao.GenericHibernateDAO;
 import com.spring.rest.model.Department;
@@ -11,6 +12,7 @@ import com.spring.rest.model.Department;
  * @author Rishikesh Shukla
  *
  */
+@Repository("departmentDAO")
 public class DepartmentDAOImpl implements DepartmentDAO {
 
 	@Autowired
