@@ -29,7 +29,7 @@ public class GenericHibernateDAO implements GenericDAO {
 	private SessionFactory sessionFactory;
 
 	private Session getSession() {
-		return sessionFactory.openSession();
+		return sessionFactory.getCurrentSession();
 	}
 
 	@Override

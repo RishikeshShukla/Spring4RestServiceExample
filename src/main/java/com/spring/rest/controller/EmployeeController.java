@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spring.rest.employee.service.EmployeeService;
 import com.spring.rest.model.Employee;
+import com.spring.rest.model.EntityList;
 
 /*
  * Controller which will do all data retrieval/manipulation for Employees
@@ -37,14 +38,16 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/employee/", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Employee>> listAllEmployees() {
+	public ResponseEntity<EntityList<Employee>> listAllEmployees() {
 
 		List<Employee> employees = employeeService.findAllEmployees();
 		if (employees.isEmpty()) {
 			// can return HttpStatus.NOT_FOUND
-			return new ResponseEntity<List<Employee>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<EntityList<Employee>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
+		EntityList<Employee> empEntityList = new EntityList<Employee>(employees);
+		
+		return new ResponseEntity<EntityList<Employee>>(empEntityList, HttpStatus.OK);
 	}
 
 	/**

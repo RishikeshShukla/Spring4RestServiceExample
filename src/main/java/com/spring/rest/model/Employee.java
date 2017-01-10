@@ -12,10 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+@XmlRootElement(name = "employee")
 @Entity
 @Table(name = "employee", catalog = "spring_rest_app", uniqueConstraints = @UniqueConstraint(columnNames = "email_id"))
 public class Employee implements com.spring.rest.model.Entity  {
@@ -123,6 +126,7 @@ public class Employee implements com.spring.rest.model.Entity  {
 		this.salary = salary;
 	}
 
+	@XmlElement(name = "address")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
 	public Set<Address> getAddresses() {

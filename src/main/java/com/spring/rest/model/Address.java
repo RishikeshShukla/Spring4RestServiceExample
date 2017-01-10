@@ -7,7 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "address")
 @Entity
 @Table(name = "address", catalog = "spring_rest_app")
 public class Address implements com.spring.rest.model.Entity {

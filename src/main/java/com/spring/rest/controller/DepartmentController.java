@@ -1,5 +1,6 @@
 package com.spring.rest.controller;
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spring.rest.department.service.DepartmentService;
+import com.spring.rest.employee.service.EmployeeService;
 import com.spring.rest.model.Department;
+import com.spring.rest.model.Employee;
+import com.spring.rest.model.EntityList;
 
 /**
  * @author Rishikesh Shukla
@@ -33,19 +37,29 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 	
+	@Autowired
+	EmployeeService employeeService; 
+	
 	/**
 	 * 
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<List<Department>> getAllDepartment() {
+	public ResponseEntity<EntityList<Department>> getAllDepartment() {
 
 		List<Department> departments = departmentService.findAllDepartments();
-		if (departments.isEmpty()) {
-			return new ResponseEntity<List<Department>>(HttpStatus.NO_CONTENT);
+		List<Employee> employees = employeeService.findAllEmployees();
+		
+		for(Department department : departments){
+			department.setEmployees(new HashSet<Employee>(employees));
 		}
-		return new ResponseEntity<List<Department>>(departments, HttpStatus.OK);
+		
+		if (departments.isEmpty()) {
+			return new ResponseEntity<EntityList<Department>>(HttpStatus.NO_CONTENT);
+		}
+		EntityList<Department> depEntityList = new EntityList<Department>(departments);
+		return new ResponseEntity<EntityList<Department>>(depEntityList, HttpStatus.OK);
 	}
 
 	/**
