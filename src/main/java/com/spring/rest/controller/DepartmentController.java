@@ -37,8 +37,7 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 	
-	@Autowired
-	EmployeeService employeeService; 
+	 
 	
 	/**
 	 * 
@@ -49,11 +48,6 @@ public class DepartmentController {
 	public ResponseEntity<EntityList<Department>> getAllDepartment() {
 
 		List<Department> departments = departmentService.findAllDepartments();
-		List<Employee> employees = employeeService.findAllEmployees();
-		
-		for(Department department : departments){
-			department.setEmployees(new HashSet<Employee>(employees));
-		}
 		
 		if (departments.isEmpty()) {
 			return new ResponseEntity<EntityList<Department>>(HttpStatus.NO_CONTENT);

@@ -3,12 +3,13 @@ package com.spring.rest.employee.service;
 import java.util.List;
 
 import com.spring.rest.model.Employee;
+import com.spring.rest.model.EmployeeDetailDto;
 
 public interface EmployeeService {
 
-	Employee findById(long id);
+	EmployeeDetailDto findById(long id);
 
-	Employee findByEmail(String email);
+	EmployeeDetailDto findByEmail(String email);
 
 	void saveEmployee(Employee employee);
 
@@ -16,7 +17,7 @@ public interface EmployeeService {
 
 	void deletEmployeeById(long id);
 
-	List<Employee> findAllEmployees();
+	List<EmployeeDetailDto> findAllEmployees();
 
 	public boolean isEmployeeExist(Employee employee);
 

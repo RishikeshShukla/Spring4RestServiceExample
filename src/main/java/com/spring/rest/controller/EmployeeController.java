@@ -3,6 +3,7 @@ package com.spring.rest.controller;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spring.rest.employee.service.EmployeeService;
 import com.spring.rest.model.Employee;
+import com.spring.rest.model.EmployeeDetailDto;
 import com.spring.rest.model.EntityList;
 
 /*
@@ -31,6 +33,9 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService; 
+	
+	@Autowired
+	ModelMapper modelMapper;
 
 	/**
 	 * Method to Retrieve All Employee
@@ -38,16 +43,16 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/employee/", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<EntityList<Employee>> listAllEmployees() {
+	public ResponseEntity<EntityList<EmployeeDetailDto>> listAllEmployees() {
 
-		List<Employee> employees = employeeService.findAllEmployees();
+		List<EmployeeDetailDto> employees = employeeService.findAllEmployees();
 		if (employees.isEmpty()) {
 			// can return HttpStatus.NOT_FOUND
-			return new ResponseEntity<EntityList<Employee>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<EntityList<EmployeeDetailDto>>(HttpStatus.NO_CONTENT);
 		}
-		EntityList<Employee> empEntityList = new EntityList<Employee>(employees);
+		EntityList<EmployeeDetailDto> empEntityList = new EntityList<EmployeeDetailDto>(employees);
 		
-		return new ResponseEntity<EntityList<Employee>>(empEntityList, HttpStatus.OK);
+		return new ResponseEntity<EntityList<EmployeeDetailDto>>(empEntityList, HttpStatus.OK);
 	}
 
 	/**
@@ -59,13 +64,13 @@ public class EmployeeController {
 	 */
 	@RequestMapping(value = "/employee/{id}", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Employee> getEmployee(@PathVariable("id") long id) {
+	public ResponseEntity<EmployeeDetailDto> getEmployee(@PathVariable("id") long id) {
 		
-		Employee employee = employeeService.findById(id);
-		if (employee == null) {
-			return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+		EmployeeDetailDto employeeDtlDto = employeeService.findById(id);
+		if (employeeDtlDto == null) {
+			return new ResponseEntity<EmployeeDetailDto>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+		return new ResponseEntity<EmployeeDetailDto>(employeeDtlDto, HttpStatus.OK);
 	}
 
 	
@@ -108,14 +113,14 @@ public class EmployeeController {
 	@RequestMapping(value = "/employee/{id}", method = RequestMethod.PUT, consumes = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Employee> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee) {
+	public ResponseEntity<EmployeeDetailDto> updateEmployee(@PathVariable("id") long id, @RequestBody Employee employee) {
 	
 		logger.info("Updating Employee " + id);
-		Employee currentEmployee = employeeService.findById(id);
+		EmployeeDetailDto currentEmployee = employeeService.findById(id);
 
 		if (currentEmployee == null) {
 			logger.warn("Employee with id " + id + " not found");
-			return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<EmployeeDetailDto>(HttpStatus.NOT_FOUND);
 		}
 
 		currentEmployee.setFirstName(employee.getFirstName());
@@ -123,9 +128,12 @@ public class EmployeeController {
 		currentEmployee.setEmailId(employee.getEmailId());
 		currentEmployee.setAge(employee.getAge());
 		currentEmployee.setSalary(employee.getSalary());
-
-		employeeService.updateEmployee(currentEmployee);
-		return new ResponseEntity<Employee>(currentEmployee, HttpStatus.OK);
+		
+		Employee  updatedEmployee = modelMapper.map(currentEmployee, Employee.class); 
+		
+		employeeService.updateEmployee(updatedEmployee);
+		
+		return new ResponseEntity<EmployeeDetailDto>(currentEmployee, HttpStatus.OK);
 	}
 
 	
@@ -139,17 +147,18 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/employee/{id}", method = RequestMethod.DELETE, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") long id) {
+	public ResponseEntity<Void> deleteEmployee(@PathVariable("id") long id) {
 		logger.info("Fetching & Deleting Employee with id " + id);
 
-		Employee employee = employeeService.findById(id);
+		EmployeeDetailDto employee = employeeService.findById(id);
+	
 		if (employee == null) {
 			logger.warn("Unable to delete. Employee with id " + id + " not found");
-			return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
 		employeeService.deletEmployeeById(id);
-		return new ResponseEntity<Employee>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 
 	// -------------------  --------------------
