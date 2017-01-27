@@ -27,12 +27,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
+	/*public List<EmployeeDetailDto> findAllEmployees() {
+		List<Employee> employees = employeeDAO.findAllEmployees();
+
+		List<EmployeeDetailDto> employeeDetailDtos = EntityToDtoConverterUtil
+				.convertEntityCollectionToDtoCollection(employees, EmployeeDetailDto.class);
+		return employeeDetailDtos;
+	}*/
+	
 	public List<EmployeeDetailDto> findAllEmployees() {
 		List<Employee> employees = employeeDAO.findAllEmployees();
 
-		/*List<EmployeeDetailDto> employeeDetailDtos = (List<EmployeeDetailDto>) EntityToDtoConverterUtil
-				.convertEntityCollectionToDtoCollection(employees, EmployeeDetailDto.class);*/
-		List<EmployeeDetailDto> employeeDetailDtos = null;
+		List<EmployeeDetailDto> employeeDetailDtos = EntityToDtoConverterUtil
+				.convertEmployeeEntityCollectionToDtoCollection(employees, EmployeeDetailDto.class);
 		return employeeDetailDtos;
 	}
 

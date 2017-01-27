@@ -14,5 +14,6 @@ public class Constants {
 	public static final int SQL_ERROR_CODE = 101;
 	public static final int DATA_ERROR_CODE = 102;
 	public static final String UNABLE_TO_PERFORM_OPERATION = "Unable to perform operation ";
+	public static final int ZERO_INDEX = 0;
 
 }
