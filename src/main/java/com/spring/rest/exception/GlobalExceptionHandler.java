@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
 				+ exception.getLocalizedMessage());
 		logger.error("Request failed due to Exception : "
 				+ exception.getCause());
-		logger.error(exception);
+		logger.error(exception.getCause());
 		return new ResponseEntity<ErrorMessage>(errorMessage,
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}

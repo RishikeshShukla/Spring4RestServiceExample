@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spring.rest.employee.service.EmployeeService;
+import com.spring.rest.model.DtoResponse;
 import com.spring.rest.model.Employee;
 import com.spring.rest.model.EmployeeDetailDto;
-import com.spring.rest.model.EntityList;
 
 /*
  * Controller which will do all data retrieval/manipulation for Employees
@@ -43,16 +43,19 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/employee/", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<EntityList<EmployeeDetailDto>> listAllEmployees() {
+	public ResponseEntity<DtoResponse> listAllEmployees() {
 
-		List<EmployeeDetailDto> employees = employeeService.findAllEmployees();
+		List<EmployeeDetailDto> employeeList = employeeService.findAllEmployees();
+		System.out.println("controller" + employeeList.size());
+		DtoResponse employees = new DtoResponse(employeeList);
+		
 		if (employees.isEmpty()) {
 			// can return HttpStatus.NOT_FOUND
-			return new ResponseEntity<EntityList<EmployeeDetailDto>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		EntityList<EmployeeDetailDto> empEntityList = new EntityList<EmployeeDetailDto>(employees);
+		//List<EmployeeDetailDto> empEntityList = new List<EmployeeDetailDto>(employees);
 		
-		return new ResponseEntity<EntityList<EmployeeDetailDto>>(empEntityList, HttpStatus.OK);
+		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}
 
 	/**
